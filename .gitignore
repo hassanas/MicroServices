@@ -1,15 +1,8 @@
-# Centralized ignore policy for all microservices in this repository.
-# Keep service-level .gitignore files removed unless a truly service-specific rule is needed.
-
 # === Build outputs (all services) ===
 **/target/
 **/build/
 out/
 *.class
-!**/src/main/**/target/
-!**/src/test/**/target/
-!**/src/main/**/build/
-!**/src/test/**/build/
 
 # === Runtime folders, logs, temp files ===
 **/logs/
@@ -45,15 +38,6 @@ product-service/data/
 .settings/
 .vscode/
 *.sublime-*
-.apt_generated
-.factorypath
-.springBeans
-.sts4-cache
-**/nbproject/private/
-**/nbbuild/
-**/dist/
-**/nbdist/
-**/.nb-gradle/
 
 # === OS files ===
 .DS_Store
@@ -64,7 +48,3 @@ Thumbs.db
 .env.local
 .env.*.local
 .env.*
-
-# === Spring Initializr helper ===
-HELP.md
-
