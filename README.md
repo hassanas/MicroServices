@@ -2,6 +2,30 @@
 
 A Spring Boot 4 / Java 21 microservices system with REST, gRPC, Kafka, and Keycloak.
 
+## Technology Stack
+
+**Core**
+![Java 21](https://img.shields.io/badge/Java-21-007396?logo=openjdk&logoColor=white)
+![Spring Boot 4](https://img.shields.io/badge/Spring%20Boot-4.0.6-6DB33F?logo=springboot&logoColor=white)
+![Spring Cloud Gateway](https://img.shields.io/badge/Spring%20Cloud-Gateway-6DB33F?logo=spring&logoColor=white)
+![Maven](https://img.shields.io/badge/Maven-Build-C71A36?logo=apachemaven&logoColor=white)
+
+**APIs & Security**
+![REST API](https://img.shields.io/badge/REST-API-005571)
+![gRPC](https://img.shields.io/badge/gRPC-RPC-0F9D58?logo=grpc&logoColor=white)
+![OpenAPI](https://img.shields.io/badge/OpenAPI-Docs-6BA539?logo=openapiinitiative&logoColor=white)
+![Keycloak](https://img.shields.io/badge/Keycloak-JWT%20Auth-4D4D4D?logo=keycloak&logoColor=white)
+
+**Data & Messaging**
+![MongoDB](https://img.shields.io/badge/MongoDB-Database-47A248?logo=mongodb&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-Database-4479A1?logo=mysql&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Database-4169E1?logo=postgresql&logoColor=white)
+![Kafka](https://img.shields.io/badge/Apache%20Kafka-Event%20Streaming-231F20?logo=apachekafka&logoColor=white)
+
+**Infrastructure & Testing**
+![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?logo=docker&logoColor=white)
+![Testcontainers](https://img.shields.io/badge/Testcontainers-Testing-2496ED?logo=testcontainers&logoColor=white)
+
 **Start here for documentation:** [`docs/INDEX.md`](docs/INDEX.md)
 
 ---
