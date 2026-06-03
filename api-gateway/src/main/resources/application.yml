@@ -1,0 +1,108 @@
+server:
+  port: 9000
+  tomcat:
+    basedir: .
+    accesslog:
+      enabled: true
+      buffered: false
+      directory: logs
+      prefix: access
+      suffix: .log
+      pattern: '%t %a "%r" %s %b %D'
+
+logging:
+  file:
+    name: logs/api-gateway.log
+
+openapi:
+  gateway:
+    docs-access-token: ${OPENAPI_GATEWAY_DOCS_ACCESS_TOKEN:local-gateway-docs-token}
+
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+    disable-swagger-default-url: true
+    urls-primary-name: Product Service
+    urls:
+      - name: Product Service
+        url: /v3/api-docs/product
+      - name: Order Service
+        url: /v3/api-docs/orders
+      - name: Inventory Service
+        url: /v3/api-docs/inventory
+
+spring:
+  cloud:
+    gateway:
+      server:
+        webmvc:
+          routes:
+            # --- KAFKA UI DASHBOARD ---
+            - id: kafka_ui
+              uri: http://localhost:8989
+              predicates:
+                - Path=/kafka-ui, /kafka-ui/**
+              filters:
+                - TokenRelay=
+
+            # --- PRODUCT SERVICE ---
+            - id: product_service
+              uri: http://localhost:8080
+              predicates:
+                - Path=/api/product
+                - Path=/api/product/**
+              filters:
+                - name: CircuitBreaker
+                  args:
+                    id: productServiceCircuitBreaker
+                    fallbackUri: forward:/fallback/product
+
+            - id: product_service_docs
+              uri: http://localhost:8080
+              predicates:
+                - Path=/v3/api-docs/product
+              filters:
+                - AddRequestHeader=X-Internal-OpenApi-Access,${openapi.gateway.docs-access-token}
+                - SetPath=/v3/api-docs
+
+            # --- ORDERS SERVICE ---
+            - id: orders_service
+              uri: http://localhost:8081
+              predicates:
+                - Path=/api/orders
+                - Path=/api/orders/**
+              filters:
+                - name: CircuitBreaker
+                  args:
+                    id: ordersServiceCircuitBreaker
+                    fallbackUri: forward:/fallback/orders
+
+            - id: orders_service_docs
+              uri: http://localhost:8081
+              predicates:
+                - Path=/v3/api-docs/orders
+              filters:
+                - AddRequestHeader=X-Internal-OpenApi-Access,${openapi.gateway.docs-access-token}
+                - SetPath=/v3/api-docs
+
+            # --- INVENTORY SERVICE ---
+            - id: inventory_service
+              uri: http://localhost:8082
+              predicates:
+                - Path=/api/inventory
+                - Path=/api/inventory/**
+              filters:
+                - name: CircuitBreaker
+                  args:
+                    id: inventoryServiceCircuitBreaker
+                    fallbackUri: forward:/fallback/inventory
+
+            - id: inventory_service_docs
+              uri: http://localhost:8082
+              predicates:
+                - Path=/v3/api-docs/inventory
+              filters:
+                - AddRequestHeader=X-Internal-OpenApi-Access,${openapi.gateway.docs-access-token}
+                - SetPath=/v3/api-docs

@@ -1,0 +1,22 @@
+# This root docker-compose.yaml combines all service databases
+# without modifying individual service docker-compose files.
+#
+# It uses the "include" feature (Docker Compose 2.20+) to aggregate
+# MongoDB, MySQL, and PostgreSQL configurations from each service.
+#
+# Usage:
+#   Start all databases:  docker-compose up -d
+#   Stop all databases:   docker-compose down
+#   Check status:         docker-compose ps
+
+include:
+  - product-service/docker-compose.yaml
+  - order-service/docker-compose.yaml
+  - inventory-service/docker-compose.yaml
+  - api-gateway/docker-compose.yaml
+  - kafka-service/docker-compose.yaml
+
+networks:
+  default:
+    name: microservices-network
+

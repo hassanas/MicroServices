@@ -1,0 +1,70 @@
+# Centralized ignore policy for all microservices in this repository.
+# Keep service-level .gitignore files removed unless a truly service-specific rule is needed.
+
+# === Build outputs (all services) ===
+**/target/
+**/build/
+out/
+*.class
+!**/src/main/**/target/
+!**/src/test/**/target/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+# === Runtime folders, logs, temp files ===
+**/logs/
+**/work/
+*.log
+*.tmp
+*.bak
+
+# === Docker / local persistent data ===
+**/mysql-data/
+**/postgres-data/
+**/kafka-data/
+**/keycloak/data/
+product-service/data/
+**/*-data/
+**/.data/
+
+# === Local archives and dumps ===
+**/src.zip
+*.dump
+*.sql
+
+# === Maven wrapper binary only (keep scripts/properties tracked) ===
+**/.mvn/wrapper/maven-wrapper.jar
+
+# === IDEs & Editors ===
+.idea/
+*.iml
+*.iws
+*.ipr
+.classpath
+.project
+.settings/
+.vscode/
+*.sublime-*
+.apt_generated
+.factorypath
+.springBeans
+.sts4-cache
+**/nbproject/private/
+**/nbbuild/
+**/dist/
+**/nbdist/
+**/.nb-gradle/
+
+# === OS files ===
+.DS_Store
+Thumbs.db
+
+# === Environment & secrets ===
+.env
+.env.local
+.env.*.local
+.env.*
+
+# === Spring Initializr helper ===
+HELP.md
+
